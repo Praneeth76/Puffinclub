@@ -26,7 +26,7 @@ const Header = () => {
       <div className="flex justify-between items-center px-4 sm:px-6 md:px-10 py-4">
         {/* Brand Logo */}
         <Link to="/" className="text-2xl sm:text-3xl font-bold tracking-widest">
-          PUFFIN CLUB
+          PUFFN CLUB
         </Link>
 
         {/* Desktop Navigation */}

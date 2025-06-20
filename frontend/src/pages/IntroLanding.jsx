@@ -5,25 +5,36 @@ import logo from "../assets/logo.jpg";
 
 const IntroLanding = () => {
   const [startAnimation, setStartAnimation] = useState(false);
+  const [fadeOut, setFadeOut] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     const startTimer = setTimeout(() => {
       setStartAnimation(true);
-    }, 1200); // Wait before zoom starts
+    }, 2000); // Wait 3s before animation
+
+    const fadeTimer = setTimeout(() => {
+      setFadeOut(true);
+    }, 3800); // Start fade-out just before navigation
 
     const navigateTimer = setTimeout(() => {
       navigate("/home");
-    }, 3000); // Navigate after total duration
+    }, 5000); // Smooth navigation delay
 
     return () => {
       clearTimeout(startTimer);
+      clearTimeout(fadeTimer);
       clearTimeout(navigateTimer);
     };
   }, [navigate]);
 
   return (
-    <div className="h-screen w-full bg-black flex flex-col items-center justify-center overflow-hidden">
+    <motion.div
+      className="h-screen w-full bg-black flex flex-col items-center justify-center overflow-hidden"
+      initial={{ opacity: 1 }}
+      animate={fadeOut ? { opacity: 0 } : { opacity: 1 }}
+      transition={{ duration: 0.8, ease: "easeInOut" }}
+    >
       <AnimatePresence>
         <motion.div
           key="logo"
@@ -33,24 +44,23 @@ const IntroLanding = () => {
               ? { scale: 20, opacity: 0 }
               : { scale: 1, opacity: 1 }
           }
-          transition={{ duration: 1.8 }}
+          transition={{ duration: 2.2, ease: "easeInOut", delay: startAnimation ? 1 : 0 }}
           className="z-10"
         >
           <img src={logo} alt="Logo" className="w-64 h-64 object-contain" />
         </motion.div>
 
-        {!startAnimation && (
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 1 }}
-            className="text-white text-xl mt-4 tracking-widest font-semibold"
-          >
-            STAY IN STYLE
-          </motion.h1>
-        )}
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ delay: 0.5, duration: 1 }}
+          className="text-white text-xl mt-4 tracking-widest font-semibold"
+        >
+          STAY IN STYLE
+        </motion.h1>
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 };
 
