@@ -12,6 +12,7 @@ import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 import SingleProduct from "./pages/SingleProduct";
 import AuthPage from "./pages/AuthPage";
+import Profile from "./pages/Profile";
 
 const App = () => (
   <Router>
@@ -81,6 +82,10 @@ const App = () => (
       <Route
         path="/signup"
         element={<AuthPage isLogin={false} />}
+      />
+      <Route
+        path="/profile"
+        element={<Layout><Profile /></Layout>}
       />
     </Routes>
   </Router>

@@ -18,12 +18,12 @@ const Footer = () => (
     <div className="flex flex-col md:flex-row justify-between items-center gap-6 text-sm">
       {/* Brand */}
       <div className="font-bold text-xl text-center md:text-left">
-        <Link to="/">PUFFIN CLUB</Link>
+        <Link to="/home">PUFFN CLUB</Link>
       </div>
 
       {/* Copyright */}
       <div className="text-center text-gray-300 text-sm">
-        © 2025 Puffin Club. All rights reserved.
+        © 2025 Puffn Club. All rights reserved.
       </div>
 
       {/* Social + Contact */}
@@ -58,7 +58,7 @@ const Footer = () => (
           </a>
         </div>
         <p className="text-xs text-gray-400 break-all">
-          info@puffinclubbrand.com
+          info@puffnclubbrand.com
         </p>
       </div>
     </div>

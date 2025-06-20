@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AuthPage = () => {
+  const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
     name: "",
@@ -10,7 +12,7 @@ const AuthPage = () => {
     confirmPassword: "",
     userType: "",
     address: "",
-    areaCode: ""
+    areaCode: "",
   });
 
   const handleChange = (e) => {
@@ -20,18 +22,36 @@ const AuthPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (!isLogin && formData.password !== formData.confirmPassword) {
       alert("Passwords do not match");
       return;
     }
-    console.log("Form submitted:", formData);
-    // Add API call here
+
+    // Simulate storing a token and user data
+    const userData = {
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      userType: formData.userType,
+      ...(formData.userType === "customer" && { address: formData.address }),
+      ...(formData.userType === "delivery" && { areaCode: formData.areaCode }),
+    };
+
+    localStorage.setItem("token", "mock-token"); // Replace with real token later
+    localStorage.setItem("user", JSON.stringify(userData));
+
+    // Redirect to home
+    navigate("/home");
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-black to-gray-900">
-      <form onSubmit={handleSubmit} className="bg-gray-800 text-white p-8 rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.5)] w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-6 text-center">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-black to-gray-900 px-4 sm:px-6 lg:px-8">
+      <form
+        onSubmit={handleSubmit}
+        className="w-full max-w-md bg-gray-800 text-white p-6 sm:p-8 rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.5)]"
+      >
+        <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-center">
           {isLogin ? "Login to PUFFN CLUB" : "Join PUFFN CLUB"}
         </h2>
 
@@ -91,7 +111,7 @@ const AuthPage = () => {
 
         <select
           name="userType"
-          className="w-full mb-3 p-2 border border-gray-400 bg-gray-700 text-white rounded"
+          className="w-full mb-3 p-3 sm:p-2 border border-gray-400 bg-gray-700 text-white text-sm sm:text-base rounded focus:outline-none focus:ring-2 focus:ring-white/30 transition"
           value={formData.userType}
           onChange={handleChange}
           required
@@ -108,6 +128,7 @@ const AuthPage = () => {
             className="w-full mb-3 p-2 border border-gray-400 bg-gray-700 text-white rounded"
             value={formData.address}
             onChange={handleChange}
+            required
           />
         )}
 
@@ -119,10 +140,14 @@ const AuthPage = () => {
             className="w-full mb-3 p-2 border border-gray-400 bg-gray-700 text-white rounded"
             value={formData.areaCode}
             onChange={handleChange}
+            required
           />
         )}
 
-        <button className="w-full bg-white text-black py-2 rounded hover:bg-gray-300 cursor-pointer">
+        <button
+          type="submit"
+          className="w-full bg-white text-black py-2 rounded hover:bg-gray-300 transition"
+        >
           {isLogin ? "Log In" : "Sign Up"}
         </button>
 
@@ -131,7 +156,7 @@ const AuthPage = () => {
           <button
             type="button"
             onClick={() => setIsLogin(!isLogin)}
-            className="text-gray-300 underline cursor-pointer"
+            className="text-gray-300 underline hover:text-white transition"
           >
             {isLogin ? "Sign Up" : "Log In"}
           </button>

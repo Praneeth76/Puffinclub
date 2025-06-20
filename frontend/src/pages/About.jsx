@@ -12,10 +12,10 @@ const textVariants = {
 
 const About = () => {
   const storyParagraphs = [
-    "Welcome to the Puffin Club — a cozy corner of the world where creativity, individuality, and comfort meet fashion.",
+    "Welcome to the Puffn Club — a cozy corner of the world where creativity, individuality, and comfort meet fashion.",
     "Born from a love for uniqueness and the bold charm of puffins, our brand stands for those who don't just follow trends — they create them.",
     "Every piece we design tells a story — a tale of confidence, sustainability, and style stitched with passion and purpose.",
-    "From streetwear rebels to quiet trendsetters, Puffin Club is a community that embraces the quirky, the colorful, and the unapologetically authentic.",
+    "From streetwear rebels to quiet trendsetters, Puffn Club is a community that embraces the quirky, the colorful, and the unapologetically authentic.",
     "Join the club. Wear your story. Fly high like a puffin.",
   ];
 
